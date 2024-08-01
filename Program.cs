@@ -3,16 +3,16 @@ string[] ogrAdlari =  ["yavuz","ahmet","fatma","sibel"];
 //sinav sayisi
 int sinavSayisi = 5;
 //ilk 5 not sinav notu, sonrakiler odevlerin notlari katsayilari %10.
-int[] yavuzNotlari =  {100,81,90,70,80,100,50};
-int[] hamzaNotlari =  {100,100,60,70,80,80};
-int[] omerNotlari =  {99,100,80,100,95,96};
-int[] yagizNotlari =  {100,100,60,70,70,95,92};
+int[] yavuzNotlari =  {100,81,90,90,80,100,50};
+int[] ahmetNotlari =  {100,30,60,70,80,80};
+int[] fatmaNotlari =  {99,100,20,100,95,96};
+int[] sibelNotlari =  {20,10,60,70,70,100,100};
 //dongu icinde farkli ogrencilerin notlarını tutacak
-int [] ogrNotlari = new int[];
+int [] ogrNotlari = new int [10];
 //harf notu
-string harfNotu = "";
+string harfNotu = " ";
 //tablonun basliklari
-Console.WriteLine("Ogrenci\t\tNot\t");
+Console.WriteLine("Ogrenci\tSinav\tEk puan\tSonuc\tHarf notu");
 
 foreach(string isim in ogrAdlari)
 {
@@ -25,20 +25,20 @@ foreach(string isim in ogrAdlari)
     }
     else if(seciliOgr=="hamza")
     {
-        ogrNotlari = hamzaNotlari;
+        ogrNotlari = ahmetNotlari;
     }
-    else if (seciliOgr=="omer")
+    else if (seciliOgr=="ahmet")
     {
-        ogrNotlari = omerNotlari;
+        ogrNotlari = fatmaNotlari;
     }
-    else if (seciliOgr=="yagiz")
+    else if (seciliOgr=="sibel")
     {
-        ogrNotlari = yagizNotlari;
+        ogrNotlari = sibelNotlari;
     }
 
+    decimal sinavlarinSonucu = 0;
     int notlarinToplami = 0;
     decimal seciliOgrninNotOrtalamasi = 0;
-
     int verilenOdevSayisi = 0;
 
     foreach(int not in ogrNotlari)
@@ -46,7 +46,10 @@ foreach(string isim in ogrAdlari)
         verilenOdevSayisi++;
 
         if(verilenOdevSayisi <= sinavSayisi)
-        notlarinToplami+=not;
+        {
+            notlarinToplami+=not;
+            sinavlarinSonucu = (decimal)notlarinToplami/sinavSayisi;
+        }
         else
         notlarinToplami+=not/10;
     }
@@ -66,35 +69,8 @@ foreach(string isim in ogrAdlari)
     else if(seciliOgrninNotOrtalamasi>=63) harfNotu="D";
     else if(seciliOgrninNotOrtalamasi>=60) harfNotu="D-";
     else harfNotu="F";
-
-    Console.WriteLine($"{seciliOgr}\t\t{seciliOgrninNotOrtalamasi}\t{harfNotu}");
+    
+    Console.WriteLine($"{seciliOgr}\t{sinavlarinSonucu}\t({seciliOgrninNotOrtalamasi-sinavlarinSonucu})\t{seciliOgrninNotOrtalamasi}\t{harfNotu}\t\t\t");
 }
 Console.WriteLine("Devam etmek icin bir tusa basiniz. ");
 Console.ReadLine();
-
-
-/*
-foreach (string isim in ogrAdlari)
-{
-    string seciliOgr = isim;
-    int yavuzToplam=0;
-    decimal yavuzNot=0;
-    if(seciliOgr == "yavuz")
-    {
-        foreach (int not in yavuzNotlari)
-        {
-            yavuzToplam+=not;
-        }
-        yavuzNot = yavuzToplam/(decimal)sinavSayisi;
-        Console.WriteLine($"{ogrAdlari[0]}'un not ortalamasi {yavuzNot}");
-    }
-}
-*/
-
-/*
-Console.WriteLine($"Ogrencimiz {ogrAdlari[0]}'nin no ortalamasi {ogr1Ort}");
-Console.WriteLine($"Ogrencimiz {ogrAdlari[1]}'nin no ortalamasi {ogr2Ort}");
-Console.WriteLine($"Ogrencimiz {ogrAdlari[2]}'nin no ortalamasi {ogr3Ort}");
-Console.WriteLine($"Ogrencimiz {ogrAdlari[3]}'nin no ortalamasi {ogr4Ort}");
-
-*/
